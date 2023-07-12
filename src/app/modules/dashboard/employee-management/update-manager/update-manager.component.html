@@ -1,0 +1,48 @@
+<div class="overlay" *ngIf="blnShowSpinner">
+    <div class="loader"></div>
+</div>
+<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+        <img class="center" alt="" src="../../../../../assets/images/update_manager.jpg">
+        <h2 class="mt-2 mb-3">Change Manager</h2>
+        <form [formGroup]="objEmployeeForm" #objFormSelector="ngForm">
+            <div class="row">
+                <div class="col-md-6 p-2 ipad_width">
+                    <div class="form-group employee">
+                        <label for="firstname" class="formbold-form-label"> Current manager </label>
+                        <select class="formbold-form-input pointer" formControlName="currentManagerId" (change)="getManagerDetails($event,1)">
+                            <option [value]="0" hidden>Select Manager</option>
+                            <option *ngFor="let i of aryManagerList" [value]="i.u_id">{{((i.username.length > 15) ) ? (i.username | slice:0:15)+'..' : i.username}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6 p-2 ipad_width">
+                    <div class="form-group employee">
+                        <label for="firstname" class="formbold-form-label"> New manager </label>
+                        <select class="formbold-form-input pointer" formControlName="newManagerId" (change)="getManagerDetails($event,2)">
+                            <option [value]="0" hidden>Select Manager</option>
+                            <option [hidden]="i.u_id == objEmployeeForm.value.currentManagerId" *ngFor="let i of aryManagerList" [value]="i.u_id">{{((i.username.length > 15)) ? (i.username | slice:0:15)+'..' : i.username}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-2" *ngIf="objEmployeeForm.value.currentManagerId != '0' && !blnShowSpinner2">
+                <label for="firstname" class="formbold-form-label"> Employees </label>
+                <div class="col-12 mt-2 employee-area p-2" *ngIf="aryUserList.length > 0">
+                    <label class="radio-container" *ngFor="let i of aryUserList" >
+                        <input type="radio" formControlName="selectedEmployee" [value]="i.u_id" (click)="selectedUserDetails(i)">
+                        <div class="emp-name">{{i.username}}</div>
+                    </label>
+                </div>
+                <div class="pt-2" *ngIf="aryUserList.length === 0 && !blnShowSpinner2" style="text-align: center;">Users not found</div>
+            </div>
+            <div class="user_list_loader" *ngIf="blnShowSpinner2"></div>
+            <div class="col-12 mt-4">
+                <button class="formbold-btn-cancel col-5" (click)="openCloseModal(5)">Cancel</button>
+                <button class="btn formbold-btn col-5"  
+                [disabled]="objEmployeeForm.invalid || objEmployeeForm.value.currentManagerId == '0' || objEmployeeForm.value.newManagerId == '0'"
+                 (click)="changeManager()"> Save</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.formbold-mb-3 {
+    margin-bottom: 15px;
+}
+
+.formbold-relative {
+    position: relative;
+}
+
+.formbold-opacity-0 {
+    opacity: 0;
+}
+
+.formbold-stroke-current {
+    stroke: currentColor;
+}
+
+#supportCheckbox:checked~div span {
+    opacity: 1;
+}
+
+.formbold-main-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+}
+
+.formbold-form-wrapper {
+    margin: 0 auto;
+    max-width: 570px;
+    width: 100%;
+    background: white;
+}
+
+.formbold-img {
+    margin-bottom: 45px;
+}
+
+.formbold-form-title {
+    margin-bottom: 30px;
+}
+
+.formbold-form-title h2 {
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 34px;
+    color: #07074d;
+}
+
+.formbold-form-title p {
+    font-size: 16px;
+    line-height: 24px;
+    color: #536387;
+    margin-top: 12px;
+}
+
+.formbold-input-flex {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.formbold-input-flex>div {
+    width: 50%;
+}
+
+.formbold-form-input {
+    text-align: center;
+    width: 100%;
+    padding: 13px 22px;
+    border-radius: 5px;
+    border: 1px solid #dde3ec;
+    background: #ffffff;
+    font-weight: 500;
+    font-size: 16px;
+    color: #536387;
+    outline: none;
+    resize: none;
+}
+
+.formbold-form-input:focus {
+    border-color: #556ee6;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.formbold-form-label {
+    color: #536387;
+    font-size: 14px;
+    line-height: 24px;
+    display: block;
+}
+
+
+.formbold-btn {
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 14px 25px;
+    border: none;
+    font-weight: 500;
+    background-color: #556ee6;
+    color: white;
+    cursor: pointer;
+    margin-top: 25px;
+    float: right;
+}
+
+.formbold-btn:hover {
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.formbold-btn-cancel {
+    font-size: 16px;
+    border-radius: 5px;
+    padding: 14px 25px;
+    border: none;
+    font-weight: 500;
+    background-color: #acacb1;
+    color: white;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.overlay {
+    /* Height & width depends on how you want to reveal the overlay (see JS below) */
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    background-color: rgb(0 0 0 / 43%);
+    /* Black w/opacity */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+.loader {
+    border: 6px solid #556ee6;
+    /* Light grey */
+    border-top: 6px solid #f3f3f3;
+    /* Blue */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    margin-top: 30%;
+    animation: spin 0.6s linear infinite;
+}
+.user_list_loader {
+    border: 6px solid #556ee6;
+    /* Light grey */
+    border-top: 6px solid #f3f3f3;
+    /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    margin-top: 5%;
+    animation: spin 0.6s linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+/*For IE*/
+select::-ms-expand {
+    display: none;
+}
+
+
+@media (min-width: 767px) and (max-width:991px) {
+    .ipad_width {
+        width: 100% !important;
+    }
+
+}
+
+select {
+    text-align: -moz-center;
+    text-align: -webkit-center;
+    text-align: center;
+}
+
+h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.role-check div:last-child {
+    margin-left: 0.25rem;
+    margin-top: 10px;
+}
+
+@media (min-width: 768px) {
+    .role-check div:last-child {
+        margin-top: 0px;
+        margin-left: 2rem;
+    }
+
+}
+
+.error {
+    color: red;
+    font-size: 15px;
+}
+
+.radioMarginTop {
+    margin-top: 3px !important;
+}
+
+.employee-area {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    border: 1px solid #dde3ec;
+    border-radius: 5px;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* custom radio */
+
+.radio-container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.radio-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.radio-container .emp-name{
+    padding: 5px;
+}
+
+.radio-container input[type="radio"]:checked+.emp-name {
+    background-color: #556ee6;
+    color: white;
+    border-radius: 5px;
+}
+.employee select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Some browsers will not display the caret when using calc, so we put the fallback first */
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 50% !important;
+    /* !important used for overriding all other customisations */
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 25px) !important;
+    /* Better placement regardless of input width */
+}
+
+/*For IE*/
+select::-ms-expand {
+    display: none;
+}

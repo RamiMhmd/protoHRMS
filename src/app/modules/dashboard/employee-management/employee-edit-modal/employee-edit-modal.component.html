@@ -1,0 +1,76 @@
+<div class="overlay" *ngIf="blnShowSpinner">
+    <div class="loader"></div>
+</div>
+<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+        <img class="center" alt="" src="../../../../../assets/images/reg_image.jpg">
+        <h2>Edit Employee</h2>
+        <form [formGroup]="objEmployeeForm" #objFormSelector="ngForm">
+            <div class="row">
+                <div class="col-12 p-2 ipad_width">
+                    <div class="form-group">
+                        <label for="name" class="formbold-form-label"> Employee Name </label>
+                        <input type="text" formControlName="employeeName" id="employeeName" required 
+                            class="formbold-form-input text-start" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2 ipad_width">
+                    <div class="form-group">
+                        <label for="email" class="formbold-form-label"> Email </label>
+                        <input type="text" formControlName="email" id="email" required 
+                            class="formbold-form-input text-start disabletext" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2 ipad_width">
+                    <div class="form-group">
+                        <label class="formbold-form-label"> Role </label>
+                        <div class="d-block d-md-flex align-items-center role-check">
+                            <div class="d-flex" *ngIf="userrole === 1" style="margin-left: 0px !important;">
+                                <input type="radio" id="role-general" formControlName="role" [value]="1" [ngClass]="{'radioMarginTop': browser == 'Safari'}"/>
+                                <label class="formbold-form-label m-0 ms-2 p-0" for="role-general"> Admin</label>
+                            </div>
+                            <div class="d-flex" *ngIf="userrole === 2" style="margin-left: 0px !important;">
+                                <input type="radio" id="role-manager" formControlName="role" [value]="2" [ngClass]="{'radioMarginTop': browser == 'Safari'}"/>
+                                <label class="formbold-form-label m-0 ms-2 p-0" for="role-manager"> Manager </label>
+                            </div>
+                            <div class="d-flex" *ngIf="userrole === 3" style="margin-left: 0px !important;">
+                                <input type="radio" id="role-general" formControlName="role" [value]="3" [ngClass]="{'radioMarginTop': browser == 'Safari'}"/>
+                                <label class="formbold-form-label m-0 ms-2 p-0" for="role-general"> General User</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="userrole == 2">
+                <div class="row">
+                    <div class="col-12 p-2 ipad_width">
+                        <div class="form-group">
+                            <label for="email" class="formbold-form-label"> Department Name </label>
+                            <input type="text" class="formbold-form-input text-start disabletext" formControlName="groupName"/>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="userrole == 3">
+                <div class="co-12 p-2 ipad_width">
+                    <div class="form-group employee">
+                        <label for="firstname" class="formbold-form-label"> Manager </label>
+                        <select class="formbold-form-input disabletext" formControlName="manager" style="background: none !important;">
+                            <option [value]="" hidden>Select Manager</option>
+                            <option *ngFor="let i of aryManagerList" [value]="i.u_id">{{i.username}}</option>
+                        </select>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="col-12 mt-4">
+                <button class="formbold-btn-cancel col-5" (click)="openCloseModal(2)">Cancel</button>
+                <button class="btn formbold-btn col-5" [disabled]="objEmployeeForm.invalid || !selfUpdate" (click)="updateUser()">
+                    Update</button>
+            </div>
+        </form>
+    </div>
+</div>

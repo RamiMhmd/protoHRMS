@@ -1,0 +1,61 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  width: 250px;
+  background-color: #2a3042;
+  z-index: 1000;
+  height: 100vh;
+  overflow: auto;
+  color: #fff;
+}
+
+.welcome-text {
+  color: #a5acc3;
+}
+
+.welcome-text div {
+  color: #f3f6ff;
+}
+
+.section-menu .section-head {
+  font-size: 11px;
+  color: #6a7187;
+  font-weight: 600;
+  letter-spacing: .05em;
+  padding: 12px 20px;
+  width: 100%;
+}
+
+.section-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.section-menu ul li {
+  padding: 0.625rem 1.5rem;
+  font-size: 13px;
+}
+
+.section-menu ul li i {
+  font-size: 15px;
+
+  width: 20px;
+  text-align: center;
+
+}
+
+.section-menu ul li a {
+  color: #a6b0cf;
+  transition: color 0.2s ease-in-out;
+}
+
+.section-menu ul li a.link-active,
+.section-menu ul li a:hover {
+  color: #fff;
+}
+
+@media only screen and (max-width: 900px) {
+  .sidebar {
+    display: none !important;
+  }
+}

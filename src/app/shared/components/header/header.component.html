@@ -1,0 +1,44 @@
+<header class="header">
+  <div class="main-header d-flex align-items-center">
+    <div class="container head-flex">
+      <div class="head-logo">
+        <a href="">HRMS Dashboard</a>
+      </div>
+      <div class="head-menu d-flex">
+        <div ngbDropdown [placement]="'bottom-end'" [container]="'body'" class="user-dd-btn">
+          <button type="button" class="btn-dd d-flex align-items-center" id="dropdown1" ngbDropdownToggle>
+            <div class="me-2 head-name">{{(strUserName && strUserName.length >  10) ? strUserName.slice(0,10)+".." :  strUserName}}</div>
+            <i class="fa-solid fa-user"></i>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdown1">
+            <a ngbDropdownItem class="mt-0" (click)="openModal()">
+              <i class="fas fa-edit me-2"></i>Edit Profile</a>
+            <hr class="m-1 menu-divider">
+            <a ngbDropdownItem class="logout-menu mt-0" (click)="logout()">
+              <i class="fa-solid fa-power-off me-2"></i>Log out
+            </a>
+          </div>
+        </div>
+        <div ngbDropdown [placement]="'bottom-end'" [container]="null" class="menu-dd-btn me-2">
+          <button type="button" class="btn-dd" id="dropdown2" ngbDropdownToggle>
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdown2">
+            <span style="margin-left: 17px;font-size: 13px;"> <i
+                class="fa-solid fa-user me-2 "></i>{{(strUserName && strUserName.length >  10) ? strUserName.slice(0,10)+".." :  strUserName}}</span>
+            <hr class="m-1 menu-divider">
+            <a ngbDropdownItem (click)="openModal()"><i class="fas fa-edit me-2"></i>Edit
+              Profile</a>
+            <a ngbDropdownItem [routerLink]="['./attendance']" routerLinkActive="link-active"><i
+                class="fa-solid fa-calendar-days me-2"></i>Attendance</a>
+            <a ngbDropdownItem [routerLink]="['./employee']" routerLinkActive="link-active"><i
+                class="fa-solid fa-users me-2"></i>Employees</a>
+            <hr class="m-1 menu-divider">
+            <a ngbDropdownItem class="logout-menu" (click)="logout()"><i class="fa-solid fa-power-off me-2"></i> Log
+              out</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

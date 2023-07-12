@@ -1,0 +1,15 @@
+.dash-body{
+  margin-top: 80px
+}
+
+.dash-container{
+  position: relative;
+}
+
+@media only screen and (min-width: 901px) {
+  .dash-container{
+    position: absolute;
+    left: 250px;
+    width: calc( 100% - 250px);
+  }
+}

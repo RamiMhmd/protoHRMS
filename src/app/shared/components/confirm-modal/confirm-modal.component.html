@@ -1,0 +1,14 @@
+<div class="cus-modal d-flex justify-content-center align-items-center">
+  <div class="row text-center">
+    <div class="col-12 mt-2 icon-box">
+      <i class='fas fa-trash'></i>
+    </div>
+    <div class="col-12 mt-4">
+      {{strMessage}}
+    </div>
+    <div class="col-12 mt-4">
+      <button class="btn btn-soft-secondary me-2" (click)="openCloseModal(2)">close</button>
+      <button class="btn btn-soft-danger" (click)="openCloseModal(1)">confirm</button>
+    </div>
+  </div>
+</div>

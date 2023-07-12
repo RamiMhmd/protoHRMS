@@ -1,0 +1,152 @@
+<div class="container">
+  <div class="table-wrapper">
+    <div class="table-title">
+      <div class="row">
+        <div class="col-sm-8">
+          <h2><b>Attendance Details</b></h2>
+        </div>
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-info add-new" (click)="openModal(1)"><i class="fa fa-plus"></i> Add
+            New</button>
+        </div>
+      </div>
+      <form [formGroup]="attendanceSearchForm">
+        
+        <div class="row mt-3" *ngIf="intUserRole">
+          <div class="col-md-2" *ngIf="intUserRole == 1">
+            <div class="form-group">
+              <label for="employeeName">User Status</label>
+              <select class="custom-select form-control drpdwn pointer pe-30px" formControlName="userStatus" (change)="changeUserStatus($event)">
+                <option [value]="'1'" selected>Active</option>
+                <option [value]="'0'" selected>Inactive</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-3" *ngIf="intUserRole == 1 || intUserRole == 2">
+            <div class="form-group">
+              <label for="employeeName">Employee Name</label>
+              <select class="custom-select form-control drpdwn pointer pe-30px" formControlName="employeeName" id="employeeName"
+                (ngModelChange)="onFilterChange()">
+                <option [value]="0" selected>All</option>
+                <option *ngFor="let user of aryDropdownUserList" [value]="user.User_id">
+                  {{user.Username}} </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="yearMonth">Year and Month</label>
+              <input [(ngModel)]="modelDate" formControlName="yearMonth" autocomplete="off"
+                [placeholder]="strYearPlaceholder" class="form-control month-picker pointer" bsDatepicker
+                [bsConfig]="{dateInputFormat: 'YYYY MMMM'}" (onShown)="onOpenCalendar($event)"
+                (keydown)="preventTyping($event)" (ngModelChange)="onFilterChange()">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label for="status">Status</label>
+              <select class="custom-select form-control drpdwn pointer pe-30px" formControlName="status" id="status"
+                (ngModelChange)="onFilterChange()">
+                <option [value]="3" selected>All</option>
+                <option [value]="0">Pending</option>
+                <option [value]="1">Approved</option>
+                <option [value]="2">Cancelled</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <button type="button" class="btn btn-primary btnfilter" (click)="searchReset()"
+                [disabled]="!this.attendanceSearchForm.controls['yearMonth'].value && 
+                          (!this.attendanceSearchForm.controls['employeeName'].value || this.attendanceSearchForm.controls['employeeName'].value === '0') && 
+                          (!this.attendanceSearchForm.controls['status'].value || this.attendanceSearchForm.controls['status'].value === '3')">
+                <i class="fa fa-eraser"></i>&nbsp;Clear
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="loader" *ngIf="boolIsLoading"></div>
+    <div style="overflow-x:auto;">
+      <div class="pagination" *ngIf="aryAttendanceList.length != 0 && intTotalItems > initPageSize && !boolIsLoading">
+        <ngb-pagination [collectionSize]="intTotalItems" [pageSize]="initPageSize" [maxSize]="5" [rotate]="true"
+          [(page)]="intPageNumber" [boundaryLinks]="true" (pageChange)="onTableDataChange($event)"></ngb-pagination>
+      </div>
+      <table class="table-bordered" *ngIf="!boolIsLoading && aryAttendanceList.length != 0">
+        <thead>
+          <tr class="headrcolor">
+            <th style="width:6%">Index</th>
+            <th style="width:20%">Employee Name</th>
+            <th style="width:15%">Date
+              <i class="fa fa-arrow-down pointer" aria-hidden="true" (click)="dateSortChange('desc')"
+                *ngIf="strDateSort == 'asc'"></i>
+              <i class="fa fa-arrow-up pointer" aria-hidden="true" (click)="dateSortChange('asc')"
+                *ngIf="strDateSort == 'desc'"></i>
+            </th>
+            <th style="width:15%">Time in</th>
+            <th style="width:15%">Time out</th>
+            <th style="width:15%">Status</th>
+            <th style="width:12%" *ngIf="!boolUserStatus">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of aryAttendanceList;index as index">
+            <td>{{(intPageNumber - 1) * initPageSize + index +1 }}</td>
+            <td>{{i.Emp_name}}</td>
+            <td>{{i.Date | date: 'yyyy-MM-dd'}}</td>
+            <td>{{i.Time_in }}</td>
+            <td>{{i.Time_out }}</td>
+            <td>
+              <div ngbDropdown [placement]="'bottom-end'" [container]="'body'" class="user-dd-btn">
+                <button type="button" class="btn-dd btn-status-attendance d-flex align-items-center" id="dropdown1"
+                  ngbDropdownToggle
+                  [disabled]="(i.Status == 1 ||(intUserRole == 3 || (intUserRole == 2 && intUserId == i.Emp_id) )&& (i.Status == 2 || i.Status == 3)|| i.Status == 2)">
+                  <button
+                    [disabled]="(i.Status == 1 ||(intUserRole == 3 || (intUserRole == 2 && intUserId == i.Emp_id) )&& (i.Status == 2 || i.Status == 3)|| i.Status == 2)"
+                    *ngIf="i.Status == 0" class="btn btn-primary btn-sm status_btn">Pending<i
+                      class="fas fa-caret-down ms-1" style="float: right;"></i></button>
+                  <button
+                    [disabled]="(i.Status == 1 ||(intUserRole == 3 || (intUserRole == 2 && intUserId == i.Emp_id) )&& (i.Status == 2 || i.Status == 3)|| i.Status == 2)"
+                    *ngIf="i.Status == 1" class="btn btn-success btn-sm status_btn">Approved</button>
+                  <button
+                    [disabled]="(i.Status == 1 ||(intUserRole == 3 || (intUserRole == 2 && intUserId == i.Emp_id) )&& (i.Status == 2 || i.Status == 3)|| i.Status == 2)"
+                    *ngIf="i.Status == 2" class="btn btn-danger btn-sm status_btn">Canceled</button>
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdown1">
+                  <a ngbDropdownItem class="logout-menu mt-0" style="color: green;" (click)="changesStatus(1,i.i_id)"
+                    [hidden]="i.Status == 1" *ngIf="intUserRole == 1 || (intUserRole == 2 && intUserId != i.Emp_id)"><i
+                      class="fa-solid fa-check me-2" style="font-size: 14px;"></i>Approve</a>
+                  <a ngbDropdownItem class="logout-menu mt-0" style="color: blue;" (click)="changesStatus(0,i.i_id)"
+                    [hidden]="i.Status == 0" *ngIf="intUserRole == 1 || intUserRole == 2"><i
+                      class="fa-solid fa-clock me-2"></i>Pending</a>
+                  <a ngbDropdownItem class="logout-menu mt-0" style="color: red;" (click)="changesStatus(2,i.i_id)"
+                    [hidden]="i.Status == 2">
+                    <i class="fa-solid fa-times"
+                      style="font-size: 14px;margin-left: 3px;margin-right: 9px;"></i>Cancel</a>
+                </div>
+              </div>
+            </td>
+            <td *ngIf="!boolUserStatus">
+              <button class="edit" title="Edit" data-toggle="tooltip" (click)="openModal(2,i.i_id)"
+                [disabled]="i.Status == 1" [ngStyle]="{'opacity': (i.Status == 1) ? '0.6' : 'none'}"><i
+                  class="fas fa-edit"></i></button>
+              <button class="delete" title="Delete" data-toggle="tooltip" (click)="clickDelete(i.i_id)"
+               [disabled]="i.Status == 1"
+                [ngStyle]="{'opacity': i.Status == 1 ? '0.6' : 'none'}"><i
+                  class="fas fa-trash"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!boolIsLoading && aryAttendanceList.length == 0">
+        <p class="nodata">No data found</p>
+      </div>
+      <div class="pagination" *ngIf="aryAttendanceList.length != 0 && intTotalItems > initPageSize && !boolIsLoading">
+        <ngb-pagination [collectionSize]="intTotalItems" [pageSize]="initPageSize" [maxSize]="5" [rotate]="true"
+          [(page)]="intPageNumber" [boundaryLinks]="true" (pageChange)="onTableDataChange($event)"></ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>

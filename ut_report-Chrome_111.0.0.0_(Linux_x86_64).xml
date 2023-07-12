@@ -1,0 +1,88 @@
+<testExecutions version="1">
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).AttendanceService">
+    <testCase name="AttendanceService Add attendance API error handling for Unauthorized" duration="12"/>
+    <testCase name="AttendanceService Add attendance API to add new attendance" duration="3"/>
+    <testCase name="AttendanceService ListAttendance API to get attendance list" duration="2"/>
+    <testCase name="AttendanceService Edit attendance API to edit an existing attendance" duration="2"/>
+    <testCase name="AttendanceService Add attendance API error handling for Forbidden, when user not in workspace" duration="1"/>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).AttendanceModalComponent">
+    <testCase name="AttendanceModalComponent Test7: Should be called the event listener for date change" duration="77"/>
+    <testCase name="AttendanceModalComponent Test6: Error should be shown for time-in greater than time-out" duration="19"/>
+    <testCase name="AttendanceModalComponent Test9: Error should be shown for a future date" duration="17"/>
+    <testCase name="AttendanceModalComponent Test3: Should call register method while clicking Register button" duration="14"/>
+    <testCase name="AttendanceModalComponent Test5: Form should be valid if all fields are filled" duration="14"/>
+    <testCase name="AttendanceModalComponent Test2: Should render title for Edit modal" duration="21"/>
+    <testCase name="AttendanceModalComponent should create" duration="14"/>
+    <testCase name="AttendanceModalComponent Test4: Form should be invalid if atleast one field is empty" duration="17"/>
+    <testCase name="AttendanceModalComponent Test1: Should render title for Add modal" duration="21"/>
+    <testCase name="AttendanceModalComponent Test8: Error should be shown for a date before the year 2000" duration="19"/>
+    <testCase name="AttendanceModalComponent Test10: Error should be shown for an invalid date format" duration="22"/>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).AttendanceManagementComponent">
+    <testCase name="AttendanceManagementComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).NotFoundComponent">
+    <testCase name="NotFoundComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).LoginComponent">
+    <testCase name="LoginComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).AppComponent">
+    <testCase name="AppComponent should create the app" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+    <testCase name="AppComponent should render title" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+    <testCase name="AppComponent should have as title 'protoHRMS'" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).HeaderComponent">
+    <testCase name="HeaderComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).SidebarComponent">
+    <testCase name="SidebarComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).UpdateManagerComponent">
+    <testCase name="UpdateManagerComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).EmployeeManagementComponent">
+    <testCase name="EmployeeManagementComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).FooterComponent">
+    <testCase name="FooterComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).EmployeeModalComponent">
+    <testCase name="EmployeeModalComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).DashboardComponent">
+    <testCase name="DashboardComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+  <file path="Chrome_111_0_0_0_(Linux_x86_64).EmployeeEditModalComponent">
+    <testCase name="EmployeeEditModalComponent should create" duration="1">
+      <skipped message="Skipped"/>
+    </testCase>
+  </file>
+</testExecutions>

@@ -1,0 +1,94 @@
+<div class="container">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="d-flex justify-content-between">
+          <div class="">
+            <h2><b>Employee Details</b></h2>
+          </div>
+          <div class="" *ngIf="intUserRole === 1">
+            <button type="button" class="btn btn-info add-new" (click)="openModal(0)"><i class="fa fa-plus"></i>Register</button>
+            <button type="button" class="btn btn-info add-new me-2" (click)="openModal(2)"><i class="fa fa-pen"></i>Change Manager</button>
+          </div>
+        </div>
+        <form [formGroup]="employeeSearchForm">
+          <div class="row mt-3">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label for="role">Role</label>
+                <select class="custom-select form-control drpdwn pointer" formControlName="role" id="role" (ngModelChange)="onFilterChange()">
+                  <option [value]="0" selected>All</option>
+                  <option [value]="1">Admin</option>
+                  <option [value]="2">Manager</option>
+                  <option [value]="3">General User</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                  <label for="role">Employee Name</label>
+                  <input type="text" class="custom-select form-control drpdwn pointer" formControlName="employeeName" id="employeeName"
+                   style="cursor: auto !important;" placeholder="Employee Name" (input) ="searchUsers()">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <button type="button" class="btn btn-primary btnfilter" (click)="searchReset()"
+                    [disabled]="!this.employeeSearchForm.controls['employeeName'].value && this.employeeSearchForm.controls['role'].value == 0">
+                    <i class="fa fa-eraser"></i>&nbsp;Clear
+                  </button>
+                </div>
+              </div>
+          </div>
+  
+        </form>
+      </div>
+      <div class="loader" *ngIf="boolIsLoading"></div>
+      <div style="overflow-x:auto;">
+        <div class="pagination" *ngIf="aryUserList.length != 0 && totalItems > initPageSize && !boolIsLoading">
+          <ngb-pagination [collectionSize]="totalItems" [pageSize]="initPageSize" [maxSize]="5" [rotate]="true"
+            [(page)]="intPageNumber" [boundaryLinks]="true" (pageChange)="pageChange($event)"></ngb-pagination>
+        </div>
+        <table class="table-bordered" *ngIf="!boolIsLoading && aryUserList.length != 0">
+          <thead>
+            <tr class="headrcolor">
+              <th style="width:6%">Index</th>
+              <th style="width:20%">Employee Name</th>
+              <th style="width:15%">Email</th>
+              <th style="width:15%">Role</th>
+              <th style="width:12%" *ngIf="intUserRole == 1">Action</th>
+              <th style="width:12%" *ngIf="intUserRole != 1">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of aryUserList;index as index; trackBy:identifyUser">
+              <td>{{(intPageNumber - 1) * initPageSize + index +1 }}</td>
+              <td>{{i.Username}}</td>
+              <td>{{i.Email}}</td>
+              <td *ngIf="i.Role === 1">Admin</td>
+              <td *ngIf="i.Role === 2">Manager</td>
+              <td *ngIf="i.Role === 3">General User</td>
+              <td>
+                <!-- <button class="edit" title="Edit" data-toggle="tooltip" (click)="openModal(1,i)" *ngIf="i.Status == 1 && intUserRole != 3"
+                  [disabled]="(intUserRole == 2 && i.Manager_Id != intUserId)" 
+                  [ngStyle]="{'opacity': (intUserRole == 2 && i.Manager_Id != intUserId)? '0.6' : 'none'}">
+                  <i class="fas fa-edit"></i></button> -->
+                <button class="delete" title="Delete" data-toggle="tooltip"  
+                  *ngIf="intUserRole == 1 && i.Status == 1" (click)="openDeleteModal(i)"
+                  [disabled]="i.Role == 1" [ngStyle]="{'opacity': (i.Role == 1)? '0.6' : 'none'}">
+                  <i class="fas fa-trash"></i></button>
+                <div class="btn btn-danger btn-sm status_btn cursor_none"  *ngIf="i.Status == 0">Deleted</div>
+                <div class="btn btn-success btn-sm status_btn cursor_none"  *ngIf="i.Status == 1 && intUserRole != 1">Active</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="!boolIsLoading && aryUserList.length == 0">
+          <p class="nodata">No data found</p>
+        </div>
+        <div class="pagination" *ngIf="aryUserList.length != 0 && totalItems > initPageSize && !boolIsLoading">
+            <ngb-pagination [collectionSize]="totalItems" [pageSize]="initPageSize" [maxSize]="5" [rotate]="true"
+              [(page)]="intPageNumber" [boundaryLinks]="true" (pageChange)="pageChange($event)"></ngb-pagination>
+          </div>
+      </div>
+    </div>
+  </div>

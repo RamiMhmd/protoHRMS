@@ -1,0 +1,72 @@
+<div class="overlay" *ngIf="blnShowSpinner">
+    <div class="loader"></div>
+</div>
+<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+        <img class="center" alt="" src="../../../../../assets/images/reg_image.jpg">
+        <h2>Register Employee</h2>
+        <form [formGroup]="objEmployeeForm" #objFormSelector="ngForm">
+            <div class="row">
+                <div class="col-12 p-2 ipad_width">
+                    <div class="form-group">
+                        <label for="email" class="formbold-form-label"> Email </label>
+                        <input type="text" formControlName="email" id="email" required
+                            class="formbold-form-input text-start" />
+                        <div
+                            *ngIf="objEmployeeForm.controls['email'].invalid && (objEmployeeForm.controls['email'].dirty || objEmployeeForm.controls['email'].touched)">
+                            <div class="pt-2 error" *ngIf="objEmployeeForm.controls['email'].errors?.['pattern']">
+                                Email is invalid.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 p-2 ipad_width">
+                    <div class="form-group">
+                        <label class="formbold-form-label"> Role </label>
+                        <div class="d-block d-md-flex align-items-center role-check">
+                            <div class="d-flex ms-1">
+                                <input type="radio" id="role-manager" formControlName="role" [value]="1" [ngClass]="{'radioMarginTop': browser == 'Safari'}"/>
+                                <label class="formbold-form-label m-0 ms-2 p-0" for="role-manager"> Manager </label>
+                            </div>
+                            <div class="d-flex">
+                                <input type="radio" id="role-general" formControlName="role" [value]="2" [ngClass]="{'radioMarginTop': browser == 'Safari'}" />
+                                <label class="formbold-form-label m-0 ms-2 p-0" for="role-general"> General User
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-container *ngIf="objEmployeeForm.value.role == 1">
+                <div class="row">
+                    <div class="col-12 p-2 ipad_width">
+                        <div class="form-group">
+                            <label for="email" class="formbold-form-label"> Department Name </label>
+                            <input type="text" class="formbold-form-input text-start" formControlName="groupName" />
+                        </div>
+                    </div>
+                </div>
+            </ng-container> 
+            <ng-container *ngIf="objEmployeeForm.value.role == 2">
+                <div class="co-12 p-2 ipad_width">
+                    <div class="form-group employee">
+                        <label for="firstname" class="formbold-form-label"> Manager </label>
+                        <select class="formbold-form-input pointer" formControlName="manager" (change)="getManagerDetails($event)">
+                            <option [value]="0" hidden>Select Manager</option>
+                            <option *ngFor="let i of aryManagerList" [value]="i.u_id">{{((i.username.length > 16) && (getScreenWidth < 650)) ? (i.username | slice:0:16)+'..' : i.username}}</option>
+                        </select>
+                    </div>
+                </div>
+            </ng-container>
+            <div class="col-12 mt-4">
+                <button class="formbold-btn-cancel col-5" (click)="openCloseModal(5)">Cancel</button>
+                <button class="btn formbold-btn col-5"
+                 [disabled]="objEmployeeForm.invalid || (objEmployeeForm.controls['manager'].value === '0' && objEmployeeForm.value.role == 2)" 
+                (click)="checkUser()">
+                    Register</button>
+            </div>
+        </form>
+    </div>
+</div>

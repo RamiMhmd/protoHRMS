@@ -1,0 +1,172 @@
+body {
+    color: #404E67;
+    background: #F5F7FA;
+    font-family: 'Open Sans', sans-serif;
+}
+.table-wrapper {
+    width: 100%;
+    margin: 30px auto;
+    background: #fff;
+    padding: 20px;	
+    padding-bottom: 58px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.table-title {
+    padding-bottom: 10px;
+    margin: 0 0 10px;
+}
+.table-title h2 {
+    margin: 6px 0 0;
+    font-size: 22px;
+}
+.table-title .add-new {
+    background: transparent;
+    color: #556ee6;
+    border-color: #556ee6;
+    float: right;
+    height: 30px;
+    font-weight: bold;
+    font-size: 12px;
+    text-shadow: none;
+    min-width: 100px;
+    border-radius: 50px;
+    line-height: 13px;
+}
+.table-title .add-new i {
+    margin-right: 4px;
+}
+table{
+    margin-bottom: 1rem;
+}
+table td button.edit {
+    color: #FFC107;
+    border: none;
+    background: transparent;
+    padding: 5px;
+}
+table td button.delete {
+    color: #E34724;
+    border: none;
+    background: transparent;
+    padding: 5px;
+}
+table td a {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 5px;
+    min-width: 24px;
+}
+table td i {
+    font-size: 19px;
+}
+table tr th, table.table tr td {
+    border-color: #e9e9e9;
+}
+
+.btnfilter{
+    margin-top: 30px;
+    height: 35px;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Some browsers will not display the caret when using calc, so we put the fallback first */ 
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat 50% !important; /* !important used for overriding all other customisations */
+    background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") white no-repeat calc(100% - 10px) !important; /* Better placement regardless of input width */
+  }
+  /*For IE*/
+  select::-ms-expand { display: none; }
+.nodata{
+    text-align: center;
+    padding: 5px;
+}
+.headrcolor{
+    background-color: #b2b3b5;
+}
+.loader {
+    border: 6px solid #556ee6; /* Light grey */
+    border-top: 6px solid #f3f3f3; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+.pagenum{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.text-right{
+    float: right;
+    margin-right: 20px;
+}
+.pagination{
+    float: right!important;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #ddd;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+input::placeholder{
+    color: #212529;
+}
+
+/* ngb dropdown */
+.dropdown-toggle::after {
+    content: unset !important;
+  }
+  
+  .dropdown-menu {
+    transform: translate3d(8px, 0px, 0px) !important;
+    box-shadow: rgb(18 38 63 / 47%) 0px 0.75rem 1.5rem;
+    transition: display 0.4s ease-in-out;
+    border: none;
+  }
+  
+  .dropdown-menu .dropdown-item {
+    transition: color 0.4s ease-in-out;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 7px;
+  }
+  
+  .dropdown-menu .dropdown-item:hover {
+    background-color: unset !important;
+    color: black !important;
+  }
+
+  .head-name {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .btn-dd {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #545a6d;
+  }
+  .status_btn{
+    width: 7rem;
+  }
+  .btn-status-attendance:disabled div{
+    pointer-events: none !important;
+  }
+
+  .pe-30px{
+    padding-right: 30px;
+    text-overflow: ellipsis;
+  }

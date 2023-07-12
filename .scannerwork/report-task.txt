@@ -1,0 +1,6 @@
+projectKey=hexabase
+serverUrl=http://10.5.24.109:9000
+serverVersion=9.6.0.59041
+dashboardUrl=http://10.5.24.109:9000/dashboard?id=hexabase
+ceTaskId=AYdQatTZd_PflC6pK7U0
+ceTaskUrl=http://10.5.24.109:9000/api/ce/task?id=AYdQatTZd_PflC6pK7U0

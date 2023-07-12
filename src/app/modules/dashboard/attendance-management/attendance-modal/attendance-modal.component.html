@@ -1,0 +1,109 @@
+<div class="overlay" *ngIf="blnShowSpinner">
+  <div class="loader"></div>
+</div>
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <img class="center" alt= "" src="https://img.freepik.com/free-vector/businessman-planning-events-deadlines-agenda_74855-6274.jpg">
+
+    <form [formGroup]="objAttendanceForm">
+      <div class="formbold-form-title">
+    
+        <h2 *ngIf="intModalId === 1" style="text-align: center;">Add Attendance</h2>
+        <h2 *ngIf="intModalId === 2" style="text-align: center;">Edit Attendance</h2>
+      </div>
+
+      <div class="row" *ngIf="intModalId === 1">
+        <div class="col-md-6 p-2 ipad_width" *ngIf="intUserRole == 1 || intUserRole == 2">
+          <div class="form-group employee">
+            <label for="firstname" class="formbold-form-label">
+              Employee
+            </label>
+            <select class="formbold-form-input pointer" formControlName="employeeId" placeholder="Select" id="employeenames"
+              (change)="setEmployeeName($event)">
+              <option selected [value]="0" hidden >Select Employee</option>
+              <option *ngFor="let i of aryUserList" [value]="i.u_id" class="pointer_cur">{{i.username.length > 16 ? (i.username | slice:0:16)+'..' : i.username}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 p-2 ipad_width">
+          <div class="form-group">
+            <label for="lastname" class="formbold-form-label"> Date </label>
+              <div class="d-flex">
+                <input formControlName="date" type="text" id="date" class="formbold-form-input dp-input" ngbDatepicker #datePicker="ngbDatepicker" placeholder="DD/MM/YYYY" [firstDayOfWeek]="0"
+                 [minDate]="ngbMindate" [maxDate]="ngbMaxDate" (ngModelChange)="dateCheck()" maxlength="10"/>
+                <button type="button" class="dp-btn" (click)="datePicker.toggle()">
+                  <i class="fa-solid fa-calendar-days"></i>
+                </button>
+              </div>
+          </div>
+        </div>
+        <div class="error pt-2 ps-2" *ngIf="!blnIsValidDate && !objAttendanceForm.controls['date']?.errors?.['pattern']">Invalid date</div>
+        <div class="error pt-2 ps-2" *ngIf="objAttendanceForm.controls['date']?.errors?.['pattern']">Invalid date format</div>
+        <div class="error pt-2 ps-2" *ngIf="blnFutureDate && !objAttendanceForm.controls['date']?.errors?.['pattern']">Future dates are not permitted</div>
+        <div class="error pt-2 ps-2" *ngIf="blnInvalidDate  && !objAttendanceForm.controls['date']?.errors?.['pattern']">Dates prior to the year 2000 are not accepted</div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 p-2 ipad_width">
+          <div class="form-group">
+            <label for="post" class="formbold-form-label"> Time In </label>
+            <div class="formbold-form-input pointer timePick">
+              <select name="cars" id="cars" class="time" formControlName="timeInHr" (change)="timeInChange()" [ngClass]="{'timeDropdownWidth': browser == 'Safari'}">
+                <option [value]="0" selected hidden>--</option>
+                <option *ngFor="let i of aryHr" [value]="i">{{i}}</option>
+              </select>
+              <span class="colon">:</span>
+              <select name="cars" id="cars" class="time" formControlName="timeInMin" (change)="timeInChange()" [ngClass]="{'timeDropdownWidth': browser == 'Safari'}">
+                <option [value]="0" selected hidden>--</option>
+                <option *ngFor="let i of aryMin" [value]="i">{{i}}</option>
+              </select>
+            </div>
+          
+          </div>
+        </div>
+        <div class="col-md-6 p-2 ipad_width">
+          <div class="form-group ">
+            <label for="area" class="formbold-form-label"> Time Out </label>
+            <div class="formbold-form-input pointer timePick">
+              <select name="cars" id="cars" class="time" formControlName="timeOutHr" (change)="timeOutChange()" [ngClass]="{'timeDropdownWidth': browser == 'Safari'}">
+                <option [value]="0" selected hidden>--</option>
+                <option *ngFor="let i of aryHr" [value]="i">{{i}}</option>
+              </select>
+              <span class="colon">:</span>
+              <select name="cars" id="cars" class="time" formControlName="timeOutMin" (change)="timeOutChange()" [ngClass]="{'timeDropdownWidth': browser == 'Safari'}">
+                <option [value]="0" selected hidden>--</option>
+                <option *ngFor="let i of aryMin" [value]="i">{{i}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+   
+      </div>
+      <div class="error" *ngIf="blnTimeError">Time out should be greater than Time in</div>
+      <div class="pt-3 ps-2" *ngIf="intUserRole == 3 && intTabIndex == 2" style="color: blue;">The attendance request will be sent to your reporting manager</div>
+      <div class="col-12 mt-4">
+        <button class="formbold-btn-cancel col-5" (click)="openCloseModal(3)">Cancel</button>
+        <button class="btn formbold-btn col-5" (click)="register()" *ngIf="intModalId === 1"
+          [disabled]="objAttendanceForm.controls['employeeId'].invalid 
+          || objAttendanceForm.controls['employeeName'].invalid 
+          || objAttendanceForm.controls['date'].errors?.['pattern'] 
+          || objAttendanceForm.controls['timeIn'].invalid 
+          || objAttendanceForm.controls['timeOut'].invalid 
+          || objAttendanceForm.controls['timeInHr'].invalid 
+          || objAttendanceForm.controls['timeInMin'].invalid 
+          || objAttendanceForm.controls['timeOutHr'].invalid 
+          || objAttendanceForm.controls['timeOutMin'].invalid 
+          || objAttendanceForm.controls['employeeId'].value== 0 
+          || !objAttendanceForm.controls['date'].value
+          || blnTimeError 
+          || blnInvalidDate 
+          || blnFutureDate
+          || !blnIsValidDate">
+          <span *ngIf="intTabIndex == 1">Register</span>
+          <span *ngIf="intTabIndex == 2">Apply</span>
+        </button>
+        <button class="btn formbold-btn col-5" (click)="register()" *ngIf="intModalId === 2"
+          [disabled]="objAttendanceForm.invalid || objAttendanceForm.controls['employeeId'].value== 0 || blnTimeError">Update</button>
+      </div>
+    </form>
+  </div>
+</div>
